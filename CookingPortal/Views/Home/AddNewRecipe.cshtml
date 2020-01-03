@@ -1,0 +1,78 @@
+﻿@model List<Category>
+
+@{
+    ViewData["Title"] = "Add new";
+}
+@if (TempData.ContainsKey("Failed"))
+{
+    <div class="alert alert-danger alert-dismissible fade show my-2" role="alert">
+        @TempData["Failed"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<h1 class="text-info">Добавление нового блюда</h1>
+<form asp-action="AddNewRecipe">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input name="email" type="email" class="form-control" id="inputEmail4" placeholder="Email">
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label for="title">Заголовок</label>
+        <input name="Title" type="text" class="form-control" id="title" placeholder="Введите название блюда">
+    </div>
+    <div class="form-group">
+        <label for="Sdescription">Описание</label>
+        <textarea name="ShortDescription" class="form-control" rows="4" id="Sdescription" placeholder="Введите краткое описание блюда"></textarea>
+    </div>
+    <label for="ImageUri">Изображение готового блюда</label>
+
+    <div class="form-group">
+
+        <input name="ImageUri" type="text" class="form-control" id="imageUrl" placeholder="Введите адрес изображения">
+    </div>
+
+    @*<div style="position:relative;">
+            <a class='btn btn-primary' href='javascript:;'>
+                Выбрать файл...
+                <input name="ImageUri" type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' size="40" onchange='$("#upload-file-info").html($(this).val());'>
+            </a>
+            &nbsp;
+            <span class='label label-info' id="upload-file-info"></span>
+        </div>*@
+
+
+    <div class="form-row">
+
+        <div class="form-group col-md-4 my-4">
+            <label for="inputState">Категория блюда</label>
+            <select name="CategoryId" id="inputState" class="form-control">
+                <option selected>Выбрать...</option>
+                @foreach (var item in Model)
+                {
+                    <option value="@item.Id">@item.CatName</option>
+                }
+            </select>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label for="content">Рецепт приготовления</label>
+        <textarea name="Description" class="form-control" rows="10" id="content" placeholder="Enter content"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-info" value="Create">Добавить</button>
+</form>
+
+
+<script src='https://cloud.tinymce.com/5/tinymce.min.js'></script>
+<script>
+    tinymce.init({
+        selector: '#content',
+        plugins: 'code print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount tinymcespellchecker a11ychecker imagetools textpattern help formatpainter permanentpen pageembed tinycomments mentions linkchecker',
+        toolbar: 'code | formatselect | bold italic strikethrough forecolor backcolor permanentpen formatpainter | link image media pageembed | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent | removeformat | addcomment',
+    });</script>

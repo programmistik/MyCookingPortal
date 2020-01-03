@@ -1,0 +1,60 @@
+﻿@model RecCatViewModel
+@*List<Recipe>*@
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (TempData.ContainsKey("Created"))
+{
+    <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+        @TempData["Created"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (TempData.ContainsKey("Deleted"))
+{
+    <div class="alert alert-danger alert-dismissible fade show my-2" role="alert">
+        @TempData["Deleted"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="container m-3">
+
+    <partial name="_CategoriesPartial" model="Model.Categories" />
+
+</div>
+
+<div class="container">
+
+    <div class="row">
+
+        
+        @foreach (var item in Model.Recipes)
+        {
+            <div class="card mb-3 m-3" style="max-width: 500px; min-width:400px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="@item.ImageUri" class="card-img" alt="@item.Title" style="height: 300px; object-fit: cover">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body d-flex flex-column mt-auto">
+                            <h5 class="card-title">@item.Title.ToUpper()</h5>
+                            <p class="card-text">@item.ShortDescription</p>
+                            <a asp-controller="Home" asp-action="Recipe" asp-route-id="@item.Id" class="btn btn-primary btn-info mt-auto">Подробнее</a>
+                            <p class="card-text"><small class="text-muted"> 👁 @item.ViewCount ❤ @item.LikeCount</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+</div>

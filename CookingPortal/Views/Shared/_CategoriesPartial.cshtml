@@ -1,0 +1,13 @@
+﻿@model IEnumerable<CookingPortal.Models.Category>
+
+
+<div class="form-group row">
+    <label class="text-info font-weight-bold">Сортировка: </label>
+    <div class="mx-2">
+        <select class="sortSelect" onChange="return sortChange();">
+            <option value="0" selected="@(ViewBag.Selected == 0? true : false)">По порядку</option>
+            <option value="1" selected="@(ViewBag.Selected == 1? true : false)">По просмотрам</option>
+            <option value="2" selected="@(ViewBag.Selected == 2? true : false)">По популярности</option>
+        </select>
+    </div>
+</div>

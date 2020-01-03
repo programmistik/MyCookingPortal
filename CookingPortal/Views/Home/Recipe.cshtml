@@ -1,0 +1,34 @@
+﻿@model Recipe
+
+@{
+    ViewData["Title"] = "Recipe";
+}
+
+<h1>@Model.Title</h1>
+
+<button class="btn btn-lg btn-danger my-2" onclick="jsAddLike(@Model.Id)">❤ Like</button>
+<p>
+    <img src="@Model.ImageUri" alt="@Model.Title" />
+</p>
+@*<p>
+    Категория: @Model.Category.CatName
+    </p>*@
+<p>
+    Добавлено: @Model.CreationDate.ToString()
+</p>
+<p>
+    @Html.Raw(Model.ShortDescription)
+</p>
+
+<p>
+    @Html.Raw(Model.Description)
+</p>
+
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-heart-empty"></span> Домой</a>
+<button class="btn btn-lg btn-danger my-2" onclick="jsAddLike(@Model.Id)">❤ Like</button>
+
+<form method="post" asp-controller="Home" asp-action="Delete">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button class="btn btn-dark text-white my-3" type="submit"> ❌Удалить</button>
+</form>
